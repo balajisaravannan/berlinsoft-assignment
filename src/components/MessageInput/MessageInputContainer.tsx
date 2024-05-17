@@ -5,7 +5,7 @@ import { sendMessage } from '../../redux/actions/messageAction';
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    onSubmit: (message: string) => dispatch(sendMessage(message)),
+    onSubmit: (message: string, otherArg: any) => dispatch(sendMessage(message, otherArg)),
   };
 };
 

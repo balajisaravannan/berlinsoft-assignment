@@ -32,7 +32,7 @@ const [show , setShow] =useState(false)
 
   const data = [{ name: "Ravi", color: "red" }, { name: "kavi", color: "blue" }, { name: "john", color: "green" }];
 
-  const handleAutocompleteChange = (event: React.SyntheticEvent, value: any) => {
+  const handleAutocompleteChange = (_event: React.SyntheticEvent, value: any) => {
     if (value && value.name) {
       const newMessage = `${message}${value.name} `;
       setMessage(newMessage);
