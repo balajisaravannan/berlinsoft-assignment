@@ -1,9 +1,8 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { sendMessage } from "../../redux/actions/messageAction";
 import { Autocomplete, Button, TextField } from "@mui/material";
 import MessageList from "../MessageList";
-
 interface MessageInputProps {
   onSubmit: (message: string, date: Date) => void;
 }
@@ -11,6 +10,7 @@ interface MessageInputProps {
 const MessageInput: React.FC<MessageInputProps> = ({ onSubmit }) => {
   const [message, setMessage] = useState("");
   const [showAutocomplete, setShowAutocomplete] = useState(false);
+  const [width, setWidth] = useState(window.innerWidth);
 const [show , setShow] =useState(false)
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = event.target.value;
@@ -58,6 +58,17 @@ const [show , setShow] =useState(false)
     }
   }
 console.log(message)
+useEffect(() => {
+  const handleResize = () => {
+    setWidth(window.innerWidth);
+  };
+
+  window.addEventListener('resize', handleResize);
+
+  return () => {
+    window.removeEventListener('resize', handleResize);
+  };
+}, []);
   return (
     <Fragment>
       <form onSubmit={handleSubmit} className="relative">
@@ -71,8 +82,8 @@ console.log(message)
           style: {
             backgroundColor: '#fff',
             borderRadius: "5px",
-            width: "500px",
-            height: "150px",
+            width: width >= 500 ? '500px' : '300px',
+          height: width >= 500 ? '150px' : '100px',
             padding: '10px',
             fontSize:18
           }
